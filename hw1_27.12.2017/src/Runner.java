@@ -7,6 +7,9 @@ public class Runner {
         System.out.println("one more");
         System.out.println("Time");
         System.out.println("finished");
+        System.out.println("finished");
+        System.out.println("finished");
+        System.out.println("finished");
 
     }
 }
