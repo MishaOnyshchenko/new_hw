@@ -1,4 +1,4 @@
-public class Runner {
+public class MainTasksRunner {
 
     /*- вывести строку str, но заменить все буквы В на :-)
     -  вывести каждый четный символ
