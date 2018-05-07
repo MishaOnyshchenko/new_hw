@@ -46,7 +46,7 @@ public class MainTasksRunner {
     public static void printEvenChar(String str) {
         char[] arr = str.toCharArray();
         for (int i = 0; i < str.length(); i++) {
-            if (i % 2 != 0) {
+            if (i%2 != 0) {
                 System.out.print("\'" + arr[i] + "\' ");
             }
         }
@@ -59,7 +59,7 @@ public class MainTasksRunner {
 
         //create foreach loop to separate each word by str.split(" ") method
         // and count each album by equals("album") method
-        for (String s : str.split(" ")) {
+        for (String s: str.split(" ")) {
             if (s.equals("альбом")) {
                 cnt++;
             }

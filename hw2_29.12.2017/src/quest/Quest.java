@@ -18,7 +18,7 @@ public class Quest {
                 "\nВведите порядковый номер города: ");
         Scanner scn = new Scanner(System.in);
         int answer = scn.nextInt();
-
+        //starting next method which checking an answer
         chooseTheDestination(answer);
     }
 
@@ -38,6 +38,7 @@ public class Quest {
                         "то вас отправили посетить \"файне мiсто Тернопiль\".");
                 break;
         }
+        //starting method with next round
         nextRound();
     }
 
@@ -48,27 +49,28 @@ public class Quest {
                 "\nВаш выбор(введите цифру): ");
         Scanner scn = new Scanner(System.in);
         int answer = scn.nextInt();
-
+        //starting method which checking an answer
         choseTheRest(answer);
     }
 
     public static void choseTheRest(int answer) {
         switch (answer) {
-            case 1:
+            case 1: // finishing the game
                 System.out.println("\nВы очнулись в больнице с отравлением клофелином и вынуждены " +
                         "провести остаток выходных на больничной койке...\n" + "Продолжение следует...");
                 break;
-            case 2:
+            case 2: // starting game with cups
                 System.out.println("\nВы принимаете заманчивое предложение сыграть в напёрстки.");
                 playCups();
                 break;
-            default:
+            default: // finishing the game
                 System.out.println("\nРебята не поняли вашего юмора и на ближайшей станции вас забрали " +
                         "на скорой помощи с переломами нижних конечностей.\n" + "Продолжение следует...");
                 break;
         }
     }
 
+    // play in cups and finish the quest
     public static void playCups() {
         //put the ball under one of 3 cups and show it to player
         Random rnd = new Random(System.currentTimeMillis());
