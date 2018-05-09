@@ -14,12 +14,16 @@ public class Cat {
 
     private int power;
 
-    public void setPower(double weightInKg, double lengthInCm, double heightInCm) {
+    public void setPower() {
         if((weightInKg > 2.5) && (lengthInCm > 60) && (heightInCm > 25)){
             this.power = 2;
         }
         else{
             this.power = 1;
         }
+    }
+
+    public int getPower() {
+        return power;
     }
 }
