@@ -6,7 +6,7 @@ package more_than_five;
 public class MoreThanFiveRunner {
 
     public static void main(String[] args) {
-        double number = 5.01;
+        double number = 4.99;
         System.out.println("Your number " + number + " is more than 5: " + checkIfMoreThanFive(number));
     }
 

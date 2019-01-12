@@ -12,7 +12,9 @@ public class Calculator {
     public int getInt() {
         System.out.print("Enter a number: ");
         Scanner scn = new Scanner(System.in);
-        return number = scn.nextInt();
+        number = scn.nextInt();
+        scn.close();
+        return number;
     }
 
     /*-Метод char getOperation() - должен считывать с консоли какое-то значение
@@ -20,7 +22,9 @@ public class Calculator {
     public char getOperation() {
         System.out.print("Enter an operation (+, -, *, /): ");
         Scanner scn = new Scanner(System.in);
-        return operation = scn.next().charAt(0);
+        operation = scn.next().charAt(0);
+        scn.close();
+        return operation;
     }
 
     /*-Метод int calc(int num1, int num2, char operation) - должен выполнять над числами num1 и num2

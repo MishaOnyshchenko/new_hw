@@ -31,8 +31,8 @@ public class MainTasksRunner {
                 "В начале жизни школу помню я...\n" +
                 "В поле чистом серебрится Снег...";
 
-        //replaceToSmile(text);
-        //printEvenChar(text);
+        replaceToSmile(text);
+        printEvenChars(text);
         countRepeats(text);
 
     }
@@ -40,16 +40,18 @@ public class MainTasksRunner {
     /*- вывести строку str, но заменить все буквы В на :-)*/
     public static void replaceToSmile(String str) {
         System.out.println(str.replace("В", ":-)"));
+        System.out.println();
     }
 
     /*- вывести каждый четный символ*/
-    public static void printEvenChar(String str) {
+    public static void printEvenChars(String str) {
         char[] arr = str.toCharArray();
         for (int i = 0; i < str.length(); i++) {
-            if (i%2 != 0) {
+            if (i % 2 != 0) {
                 System.out.print("\'" + arr[i] + "\' ");
             }
         }
+        System.out.println();
     }
 
     /*- вывести кол-во повторов слова альбом из следующего текста:*/
@@ -58,12 +60,12 @@ public class MainTasksRunner {
         int cnt = 0;
 
         //create foreach loop to separate each word by str.split(" ") method
-        // and count each album by equals("album") method
-        for (String s: str.split(" ")) {
+        // and count each album with equals("album") method
+        for (String s : str.split(" ")) {
             if (s.equals("альбом")) {
                 cnt++;
             }
         }
-        System.out.println("Album indicated " + cnt + " times");
+        System.out.println("\nAlbum was indicated " + cnt + " times.");
     }
 }
