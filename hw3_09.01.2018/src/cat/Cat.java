@@ -1,7 +1,8 @@
 package cat;
 
-/*создать класс Cat. Кот имеет свойства имя, вес, цвет,
-рост, длина и зависящее от веса, роста и длины свойство - сила.
+/*создать класс Cat.
+Кот имеет свойства имя, вес, цвет, рост, длина
+и зависящее от веса, роста и длины свойство - сила.
 Класс Cat должен иметь параметры по умолчанию.*/
 public class Cat {
 
@@ -13,6 +14,10 @@ public class Cat {
     private double heightInCm = 35;
 
     private int power;
+
+    public Cat() {
+        setPower();
+    }
 
     public void setPower() {
         if((weightInKg > 2.5) && (lengthInCm > 60) && (heightInCm > 25)){
