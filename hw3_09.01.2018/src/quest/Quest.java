@@ -5,11 +5,13 @@ import java.util.Scanner;
 
 /*Сделать с помощью класс Scanner пошаговый квест.*/
 
+//The weekend journey quest proposes to visit some interesting places and have a fun.
 public class Quest {
 
     public static void main(String[] args) {
         start();
     }
+
 
     public static void start() {
         System.out.print("\nНаступили выходные и вы захотели провести их за пределами своего города. \n" +
@@ -18,9 +20,11 @@ public class Quest {
                 "2. Кицмань\n" +
                 "3. Тернополь\n" +
                 "\nВведите порядковый номер города: ");
+
         Scanner scn = new Scanner(System.in);
         int answer = scn.nextInt();
-        //starting next method which checking an answer
+
+        //Start the method which checking an answer.
         chooseTheDestination(answer);
     }
 
@@ -40,7 +44,8 @@ public class Quest {
                         "то вас отправили посетить \"файне мiсто Тернопiль\".");
                 break;
         }
-        //starting method with next round
+
+        //Call the method to start next round
         nextRound();
     }
 
@@ -49,37 +54,39 @@ public class Quest {
                 "1. Выпить\n" +
                 "2. Сыграть в напёрстки\n" +
                 "\nВаш выбор(введите цифру): ");
+
         Scanner scn = new Scanner(System.in);
         int answer = scn.nextInt();
-        //starting method which checking an answer
+
+        //Call the method which checking an answer
         choseTheRest(answer);
     }
 
     public static void choseTheRest(int answer) {
         switch (answer) {
-            case 1: // quick finishing the quest
+            case 1: // The quest will be finished quickly
                 System.out.println("\nВы очнулись в больнице с отравлением клофелином и вынуждены " +
                         "провести остаток выходных на больничной койке...\n" + "Продолжение следует...");
                 break;
-            case 2: // starting the game with cups
+            case 2: // Call the game with cups
                 System.out.println("\nВы принимаете заманчивое предложение сыграть в напёрстки.");
                 playCups();
                 break;
-            default: // // quick finishing the quest because of incorrect answer
+            default: // Incorrect answer and the quest will be finished
                 System.out.println("\nРебята не поняли вашего юмора и на ближайшей станции вас забрали " +
                         "на скорой помощи с переломами нижних конечностей.\n" + "Продолжение следует...");
                 break;
         }
     }
 
-    // play in cups and finish the quest
+    // Play the game with cups and finish the quest
     public static void playCups() {
-        //put the ball under one of 3 cups and show it to player
+        //Put the ball under one of 3 cups and show it to player
         Random rnd = new Random(System.currentTimeMillis());
         int limit = 3;//how many cups
         int cup = 1 + rnd.nextInt(limit);
 
-        //mix cups and put randomly the ball under one of them
+        //Mix cups and put the ball randomly under one of them
         System.out.println("Катала кладёт шарик под напёрсток № " + cup + " и начинает их вращать между собой.");
         Random rnd2 = new Random(System.currentTimeMillis());
         int newCup = 1 + rnd2.nextInt(limit);
@@ -89,7 +96,7 @@ public class Quest {
                 "1\n" +
                 "2\n" +
                 "3\n" +
-                "\nУкажите номер напёрстка под которым сейчас находится шарик: ");
+                "\nУкажите номер напёрстка, под которым сейчас находится шарик: ");
         Scanner scn = new Scanner(System.in);
         int choice = scn.nextInt();
         scn.close();
