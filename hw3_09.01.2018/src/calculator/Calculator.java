@@ -34,6 +34,7 @@ public class Calculator {
 
     public double calc(double num, char operation) throws Exception {
         boolean flag = true;
+
         switch (operation) {
             case '+':
                 result = num + getNumber();

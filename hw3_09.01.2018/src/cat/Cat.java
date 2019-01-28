@@ -6,16 +6,33 @@ package cat;
 Класс Cat должен иметь параметры по умолчанию.*/
 public class Cat {
 
-    private String name = "Tom";
-    private String color = "black";
+    private String name;
+    private String color;
 
-    private double weightInKg = 3.6;
-    private double lengthInCm = 75;
-    private double heightInCm = 35;
+    private double weightInKg;
+    private double lengthInCm;
+    private double heightInCm;
 
     private int power;
 
     public Cat() {
+        name = "Tom";
+        color = "black";
+
+        weightInKg = 3.6;
+        lengthInCm = 75;
+        heightInCm = 35;
+
+        setPower();
+    }
+
+    public Cat(String name, String color, double weightInKg, double lengthInCm, double heightInCm) {
+        this.name = name;
+        this.color = color;
+        this.weightInKg = weightInKg;
+        this.lengthInCm = lengthInCm;
+        this.heightInCm = heightInCm;
+
         setPower();
     }
 

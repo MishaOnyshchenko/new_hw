@@ -12,7 +12,6 @@ public class Quest {
         start();
     }
 
-
     public static void start() {
         System.out.print("\nНаступили выходные и вы захотели провести их за пределами своего города. \n" +
                 "\nКуда желаете отправиться?\n" +
@@ -100,6 +99,7 @@ public class Quest {
         Scanner scn = new Scanner(System.in);
         int choice = scn.nextInt();
         scn.close();
+
         //check the answer
         if (newCup == choice) {
             System.out.println("\nПримите наши поздравления! Вы выиграли и благополучно достигли пункта назначения. The end.\n");
