@@ -2,6 +2,8 @@ package com.practice.students;
 
 //Создать класс Student с полями name, age.
 
+import java.util.Objects;
+
 public class Student {
 
     private String name;
@@ -25,4 +27,14 @@ public class Student {
     }
 
 
+
+
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }

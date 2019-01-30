@@ -4,9 +4,21 @@ package com.practice.students;
 
 public class ClassRoom {
 
-    String classWord;
-    int classLimit;
-    Student[] studArr;
+    private String classWord;
+    private int classLimit;
+    private Student[] studArr;
+
+    public ClassRoom(){
+
+    }
+
+    public ClassRoom(String classWord, int classLimit, Student[] studArr){
+        this.classWord = classWord;
+        this.classLimit = classLimit;
+        this.studArr = studArr;
+    }
+
+
 
 
 
