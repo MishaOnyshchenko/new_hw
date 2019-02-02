@@ -1,8 +1,6 @@
 package com.practice.students;
 
-//Создать класс Student с полями name, age.
-
-import java.util.Objects;
+/*Создать класс Student с полями name, age.*/
 
 public class Student {
 
@@ -25,9 +23,6 @@ public class Student {
     public int getAge(){
         return age;
     }
-
-
-
 
 
     @Override

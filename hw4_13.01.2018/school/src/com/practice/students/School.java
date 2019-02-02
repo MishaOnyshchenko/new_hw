@@ -1,108 +1,128 @@
 package com.practice.students;
 
-//Необходимо создать 40 студентов, у каждого из которых должен быть указан возраст
-// (произвольный в диапазоне от 7 до 16 лет, randomNum = ThreadLocalRandom.current().nextInt(min, max + 1) -вам в помощь) и имя.
+/*
+Необходимо создать 40 студентов, у каждого из которых должен быть указан возраст
+(произвольный в диапазоне от 7 до 16 лет, randomNum = ThreadLocalRandom.current().nextInt(min, max + 1) -вам в помощь) и имя.
 
-//После чего нужно создать класс А и класс Б(это уже будут объекты на основании класса ClassRoom).
-//В класс А записать (добавить студентов) возрастом от 7 до 12 лет, остальных в класс Б.
-//При чем, каждый класс имеет макс кол-во студентов. Для А -12, для Б -15.
-//Собственно для всех мест не хватит.
-//После добавления мы должны видеть сколько студентов не смогло записаться в класс и какие именно.
+После чего нужно создать класс А и класс Б(это уже будут объекты на основании класса ClassRoom).
+В класс А записать (добавить студентов) возрастом от 7 до 12 лет, остальных в класс Б.
+При чем, каждый класс имеет макс кол-во студентов. Для А -12, для Б -15.
+Собственно для всех мест не хватит.
+После добавления мы должны видеть сколько студентов не смогло записаться в класс и какие именно.
+*/
 
+/*Реализовать методы показывающие:
+сколько человек есть в конкретном классе
+всех студентов класса(их имена и возраст)
+всех студентов класса(только имя)
+всех в отсортированном порядке по алфавиту
+по возрасту и наоборот(реверс) по обоим полям.
+
+метод который находит конкретного студента по имени в конкретном классе
+метод который ищет и показывает в каких классах есть студент с таким именем если их несколько.
+(возможно нужно будет добавить дополнительное поле в один из классов)
+
+* доп задание - когда мы создаем студентов, создать метод который будет писать     произвольные - нормальные имена. (edited)
+* */
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class School {
-//  still not enrolled students (applicants)
+//    not enrolled students (applicants)
     private static Student[] applicants;
 
     public static void main(String[] args) {
-//      write 40 students (applicants)
-        Student[] allStudents = createSetOfStudents(40);
+//        create 40 students (applicants)
+        Student[] allStudents = createAllStudentsArray(40);
         System.out.println("All students which are pretending to enter the school: " + Arrays.toString(allStudents));
-
-//      write all undistributed by classes students (applicants) to static array
+//        put all undistributed to classes students (applicants) to static array
         applicants = allStudents;
-//        System.out.println("Rest: " + Arrays.toString(applicants));
 
-//      create an array of students for class A (max 12 students to 12 years old)
-        Student[] arrayClassA = createStudentsArray(applicants, 12, 12);
+//        create an array of students for class A (max 12 students to 12 years old)
+        Student[] arrayClassA = createForClassStudentsArray(applicants, 12, 12);
         System.out.println("Array classA: " + Arrays.toString(arrayClassA));
 
-//      create an array of students for class B (max 15 students to 16 years old)
-        Student[] arrayClassB = createStudentsArray(applicants, 15, 16);
+//        create an array of students for class B (max 15 students to 16 years old)
+        Student[] arrayClassB = createForClassStudentsArray(applicants, 15, 16);
         System.out.println("Array classB: " + Arrays.toString(arrayClassB));
-
-        System.out.println("Array of applicants Now: " + Arrays.toString(applicants));
 
         ClassRoom classA = new ClassRoom("A", 12, arrayClassA);
         ClassRoom classB = new ClassRoom("B", 15, arrayClassB);
 
+        /*show all applicants which undistributed to classes*/
+        printApplicants();
+
+        showHowManyStudents(classA);
+        showHowManyStudents(classB);
+
+        showNameAndAge(classA);
+        showNameAndAge(classB);
+
 
     }
 
-    //В класс А записать (добавить студентов) возрастом от 7 до 12 лет, остальных в класс Б.
-    //При чем, каждый класс имеет макс кол-во студентов. Для А -12, для Б -15.
-    public static Student [] createStudentsArray(Student[] allStudents, int maxStudents, int maxAge) {
+    /*
+    В класс А записать (добавить студентов) возрастом от 7 до 12 лет, остальных в класс Б.
+    При чем, каждый класс имеет макс кол-во студентов. Для А -12, для Б -15.
+    */
+    public static Student[] createForClassStudentsArray(Student[] allStudents, int maxStudents, int maxAge) {
         int rightAge = 0;
-        int toOtherClasses = 0;
+        int sizeForApplicants;
 
+//        array wit students which we put in this class
         Student[] studentsArray = new Student[maxStudents];
 
-//      count students with correct age;
+        // count students with correct age;
         for (Student student : allStudents) {
             if (student.getAge() <= maxAge) {
                 rightAge++;
             }
         }
-
-//      check how many students should go to other classes
-//   a) if students with correct age more than places in this class,
-//      we should take only maxSize students to this class
-//      and the rest will be send to static array with undistributed students(applicants)
+        /*
+        check how many students should go to other classes
+        a) if students with correct age more than places in this class,
+        we should take only maxSize students to this class
+        and the rest will be send to static array with undistributed students(applicants)
+        */
         if (rightAge > maxStudents) {
-            toOtherClasses = allStudents.length - maxStudents;
+            sizeForApplicants = allStudents.length - maxStudents;
         }
-//   b) if places more than students with correct age, we should send all other students
-//      to static array with undistributed students(applicants)
+        /*
+        b) if places more than students with correct age,
+        we should send all the rest students to static array with undistributed students(applicants)
+        */
         else {
-            toOtherClasses = allStudents.length - rightAge;
+            sizeForApplicants = allStudents.length - rightAge;
         }
 
 //      set size for static array with undistributed students(applicants)
-        applicants = new Student[toOtherClasses];
-
-        for (int i = 0, j = 0, k = 0; i < allStudents.length; i++ ){
-            if(j < studentsArray.length){
-                if(allStudents[i].getAge() <= maxAge){
+        applicants = new Student[sizeForApplicants];
+        /*
+        * fill the studentsArray of the class by students with right age while it has free space
+        * the rest of students go to static array with undistributed by classes students (applicants)
+        * */
+        for (int i = 0, j = 0, k = 0; i < allStudents.length; i++) {
+            if (j < studentsArray.length) {
+                if (allStudents[i].getAge() <= maxAge) {
                     studentsArray[j] = allStudents[i];
                     j++;
-                }
-                else{
+                } else {
                     applicants[k] = allStudents[i];
                     k++;
                 }
-            }
-            else{
+            } else {
                 applicants[k] = allStudents[i];
                 k++;
             }
 
         }
-//        System.out.println("Array to A class: " + Arrays.toString(studentsArray));
-//        System.out.println("Rest array Now: " + Arrays.toString(applicants));
-
         return studentsArray;
-
     }
-
-
-
 
 
     //  Необходимо создать 40 студентов, у каждого из которых должны быть указаны имя и возраст
     // (произвольный в диапазоне от 7 до 16 лет, randomNum = ThreadLocalRandom.current().nextInt(min, max + 1).
-    public static Student[] createSetOfStudents(int size) {
+    public static Student[] createAllStudentsArray(int size) {
         Student[] studentsArray = new Student[size];
 
         for (int i = 0; i < size; i++) {
@@ -111,11 +131,45 @@ public class School {
             Student student = new Student(name, age);
             studentsArray[i] = student;
         }
-//        for (Student student : studentsArray) {
-//            System.out.println(student.getName() + " " + student.getAge());
-//        }
         return studentsArray;
     }
+
+    /*После добавления мы должны видеть сколько студентов не смогло записаться в класс и какие именно.*/
+    public static void printApplicants(){
+        System.out.println(applicants.length + " applicants at the moment: ");
+
+        for (Student applicant : applicants) {
+            System.out.println(applicant);
+        }
+    }
+
+//    сколько человек есть в конкретном классе
+    public static void showHowManyStudents(ClassRoom classRoom){
+        int howManyStudents = 0;
+        for (Student student : classRoom.getStudArr()) {
+            if(student != null){
+                howManyStudents++;
+            }
+        }
+        System.out.println(howManyStudents + " students in the class " + classRoom.getClassWord());
+    }
+
+    /*Реализовать методы показывающие:
+    всех студентов класса(только имя)
+    всех в отсортированном порядке по алфавиту
+    по возрасту и наоборот(реверс) по обоим полям.*/
+    public static void showNameAndAge(ClassRoom classRoom){
+        System.out.println("All students from class " + classRoom.getClassWord());
+        for (Student student : classRoom.getStudArr()) {
+            System.out.println(student.getName() + ", " + student.getAge());
+        }
+    }
+
+        /*Реализовать методы показывающие:
+    всех студентов класса(их имена и возраст)
+    всех студентов класса(только имя)
+    всех в отсортированном порядке по алфавиту
+    по возрасту и наоборот(реверс) по обоим полям.*/
 
 
 }
