@@ -11,7 +11,8 @@ package com.practice.students;
 После добавления мы должны видеть сколько студентов не смогло записаться в класс и какие именно.
 */
 
-/*Реализовать методы показывающие:
+/*
+Реализовать методы показывающие:
 сколько человек есть в конкретном классе
 всех студентов класса(их имена и возраст)
 всех студентов класса(только имя)
@@ -23,13 +24,15 @@ package com.practice.students;
 (возможно нужно будет добавить дополнительное поле в один из классов)
 
 * доп задание - когда мы создаем студентов, создать метод который будет писать     произвольные - нормальные имена. (edited)
-* */
+*/
+
 import java.util.Arrays;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class School {
+
 //    not enrolled students (applicants)
     private static Student[] applicants;
+
 
     public static void main(String[] args) {
 //        create 40 students (applicants)
@@ -40,7 +43,7 @@ public class School {
 
 //        create an array of students for class A (max 12 students to 12 years old)
         Student[] arrayClassA = createForClassStudentsArray(applicants, 12, 12);
-        System.out.println("Array classA: " + Arrays.toString(arrayClassA));
+        System.out.println("\nArray classA: " + Arrays.toString(arrayClassA));
 
 //        create an array of students for class B (max 15 students to 16 years old)
         Student[] arrayClassB = createForClassStudentsArray(applicants, 15, 16);
@@ -52,13 +55,38 @@ public class School {
         /*show all applicants which undistributed to classes*/
         printApplicants();
 
-        showHowManyStudents(classA);
-        showHowManyStudents(classB);
+        classA.showHowManyStudents();
+        classB.showHowManyStudents();
 
-        showNameAndAge(classA);
-        showNameAndAge(classB);
+        classA.showNameAndAge();
+        classB.showNameAndAge();
+
+        classA.showName();
+
+        classA.sortByName();
+        classB.sortByName2();
+
+        classA.sortByNameReverse();
+        classB.sortByNameReverse2();
+
+        classA.sortByAge();
+        classB.sortByAge2();
+
+        classA.sortByAgeReverse();
+        classB.sortByAgeReverse2();
 
 
+    }
+
+    //  Необходимо создать 40 студентов, у каждого из которых должны быть указаны имя и возраст
+    // (произвольный в диапазоне от 7 до 16 лет, randomNum = ThreadLocalRandom.current().nextInt(min, max + 1).
+    public static Student[] createAllStudentsArray(int size) {
+        Student[] studentsArray = new Student[size];
+
+        for (int i = 0; i < size; i++) {
+            studentsArray[i] = new Student();
+        }
+        return studentsArray;
     }
 
     /*
@@ -68,11 +96,10 @@ public class School {
     public static Student[] createForClassStudentsArray(Student[] allStudents, int maxStudents, int maxAge) {
         int rightAge = 0;
         int sizeForApplicants;
-
 //        array wit students which we put in this class
         Student[] studentsArray = new Student[maxStudents];
 
-        // count students with correct age;
+//        count students with correct age;
         for (Student student : allStudents) {
             if (student.getAge() <= maxAge) {
                 rightAge++;
@@ -98,9 +125,9 @@ public class School {
 //      set size for static array with undistributed students(applicants)
         applicants = new Student[sizeForApplicants];
         /*
-        * fill the studentsArray of the class by students with right age while it has free space
-        * the rest of students go to static array with undistributed by classes students (applicants)
-        * */
+         * fill the studentsArray of the class by students with right age while it has free space
+         * the rest of students go to static array with undistributed by classes students (applicants)
+         * */
         for (int i = 0, j = 0, k = 0; i < allStudents.length; i++) {
             if (j < studentsArray.length) {
                 if (allStudents[i].getAge() <= maxAge) {
@@ -120,58 +147,13 @@ public class School {
     }
 
 
-    //  Необходимо создать 40 студентов, у каждого из которых должны быть указаны имя и возраст
-    // (произвольный в диапазоне от 7 до 16 лет, randomNum = ThreadLocalRandom.current().nextInt(min, max + 1).
-    public static Student[] createAllStudentsArray(int size) {
-        Student[] studentsArray = new Student[size];
-
-        for (int i = 0; i < size; i++) {
-            String name = "Student" + (i + 1);
-            int age = ThreadLocalRandom.current().nextInt(7, 17);
-            Student student = new Student(name, age);
-            studentsArray[i] = student;
-        }
-        return studentsArray;
-    }
-
     /*После добавления мы должны видеть сколько студентов не смогло записаться в класс и какие именно.*/
-    public static void printApplicants(){
+    public static void printApplicants() {
         System.out.println(applicants.length + " applicants at the moment: ");
-
         for (Student applicant : applicants) {
             System.out.println(applicant);
         }
     }
-
-//    сколько человек есть в конкретном классе
-    public static void showHowManyStudents(ClassRoom classRoom){
-        int howManyStudents = 0;
-        for (Student student : classRoom.getStudArr()) {
-            if(student != null){
-                howManyStudents++;
-            }
-        }
-        System.out.println(howManyStudents + " students in the class " + classRoom.getClassWord());
-    }
-
-    /*Реализовать методы показывающие:
-    всех студентов класса(только имя)
-    всех в отсортированном порядке по алфавиту
-    по возрасту и наоборот(реверс) по обоим полям.*/
-    public static void showNameAndAge(ClassRoom classRoom){
-        System.out.println("All students from class " + classRoom.getClassWord());
-        for (Student student : classRoom.getStudArr()) {
-            System.out.println(student.getName() + ", " + student.getAge());
-        }
-    }
-
-        /*Реализовать методы показывающие:
-    всех студентов класса(их имена и возраст)
-    всех студентов класса(только имя)
-    всех в отсортированном порядке по алфавиту
-    по возрасту и наоборот(реверс) по обоим полям.*/
-
-
 }
 
 
