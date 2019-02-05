@@ -11,6 +11,7 @@ package com.practice.students;
 
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class ClassRoom {
 
@@ -32,24 +33,8 @@ public class ClassRoom {
         return classWord;
     }
 
-    public void setClassWord(String classWord) {
-        this.classWord = classWord;
-    }
-
-    public int getClassLimit() {
-        return classLimit;
-    }
-
-    public void setClassLimit(int classLimit) {
-        this.classLimit = classLimit;
-    }
-
     public Student[] getStudArr() {
         return studArr;
-    }
-
-    public void setStudArr(Student[] studArr) {
-        this.studArr = studArr;
     }
 
 
@@ -85,8 +70,9 @@ public class ClassRoom {
 
     //    всех в отсортированном порядке по алфавиту
     public void sortByName() {
-        Arrays.sort(studArr, (a, b) -> a.getName().compareTo(b.getName()));
-        System.out.println("\nStudents sorted by name from class " + classWord);
+//        Arrays.sort(studArr, (a, b) -> a.getName().compareTo(b.getName()));
+        Comparator.comparing(Student::getName);
+        System.out.println("\nStudents sorted by names from class " + classWord);
         System.out.println(Arrays.toString(studArr));
     }
 
@@ -101,7 +87,7 @@ public class ClassRoom {
                 }
             }
         }
-        System.out.println("\nVol.2 - students sorted by name from class " + classWord);
+        System.out.println("\nVol.2 - students sorted by names from class " + classWord);
         System.out.println(Arrays.toString(studArr));
     }
 
@@ -173,5 +159,19 @@ public class ClassRoom {
         }
         System.out.println("\nVol.2 - reverse-sorted by age from class " + classWord);
         System.out.println(Arrays.toString(studArr));
+    }
+
+//    метод который находит конкретного студента по имени в конкретном классе
+    public void findStudentByName(String name){
+        int count = 0;
+        System.out.println("\nShow " + name + " in the class " + classWord);
+
+        for (Student s: studArr) {
+            if(s.getName().equals(name)){
+                System.out.println(s.getName() + " (" + s.getAge() + " years)");
+                count++;
+            }
+        }
+        System.out.println("Total: " + count + " with name " + name + " in the class " + classWord);
     }
 }

@@ -23,7 +23,7 @@ package com.practice.students;
 метод который ищет и показывает в каких классах есть студент с таким именем если их несколько.
 (возможно нужно будет добавить дополнительное поле в один из классов)
 
-* доп задание - когда мы создаем студентов, создать метод который будет писать     произвольные - нормальные имена. (edited)
+* доп задание - когда мы создаем студентов, создать метод который будет писать произвольные - нормальные имена. (edited)
 */
 
 import java.util.Arrays;
@@ -32,7 +32,6 @@ public class School {
 
 //    not enrolled students (applicants)
     private static Student[] applicants;
-
 
     public static void main(String[] args) {
 //        create 40 students (applicants)
@@ -75,7 +74,11 @@ public class School {
         classA.sortByAgeReverse();
         classB.sortByAgeReverse2();
 
+        classA.findStudentByName("Anton");
+        classA.findStudentByName("Nazar");
 
+        ClassRoom[] allClasses = {classA, classB};
+        showAllStudentsByTheName(allClasses, "Katya");
     }
 
     //  Необходимо создать 40 студентов, у каждого из которых должны быть указаны имя и возраст
@@ -96,7 +99,7 @@ public class School {
     public static Student[] createForClassStudentsArray(Student[] allStudents, int maxStudents, int maxAge) {
         int rightAge = 0;
         int sizeForApplicants;
-//        array wit students which we put in this class
+//        array with students which were put in this class
         Student[] studentsArray = new Student[maxStudents];
 
 //        count students with correct age;
@@ -109,20 +112,20 @@ public class School {
         check how many students should go to other classes
         a) if students with correct age more than places in this class,
         we should take only maxSize students to this class
-        and the rest will be send to static array with undistributed students(applicants)
+        and the rest will be sent to the static array with undistributed students(applicants)
         */
         if (rightAge > maxStudents) {
             sizeForApplicants = allStudents.length - maxStudents;
         }
         /*
         b) if places more than students with correct age,
-        we should send all the rest students to static array with undistributed students(applicants)
+        we should send all the rest students to the static array with undistributed students(applicants)
         */
         else {
             sizeForApplicants = allStudents.length - rightAge;
         }
 
-//      set size for static array with undistributed students(applicants)
+//      set size for the static array with undistributed students(applicants)
         applicants = new Student[sizeForApplicants];
         /*
          * fill the studentsArray of the class by students with right age while it has free space
@@ -152,6 +155,20 @@ public class School {
         System.out.println(applicants.length + " applicants at the moment: ");
         for (Student applicant : applicants) {
             System.out.println(applicant);
+        }
+    }
+
+//    метод который ищет и показывает в каких классах есть студент с таким именем если их несколько.
+//    возможно нужно будет добавить дополнительное поле в один из классов)
+    public static void showAllStudentsByTheName(ClassRoom[] classes, String name){
+        System.out.println("\nShow all students with name " + name + " in the school");
+
+        for (ClassRoom c: classes) {
+            for (Student s: c.getStudArr()) {
+                if(s.getName().equals(name)){
+                    System.out.println(s.getName() + " (" + s.getAge() + " years) in the class " + c.getClassWord());
+                }
+            }
         }
     }
 }

@@ -1,8 +1,10 @@
 package com.practice.students;
 
-/*Создать класс Student с полями name, age.*/
-
 import java.util.concurrent.ThreadLocalRandom;
+
+
+
+/*Создать класс Student с полями name, age.*/
 
 public class Student {
 
@@ -34,7 +36,6 @@ public class Student {
     public int randomAge(){
         return ThreadLocalRandom.current().nextInt(7, 17);
     }
-
 
 
     @Override
